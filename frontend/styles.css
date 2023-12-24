@@ -16,6 +16,11 @@ body {
     padding: 1rem;
     width: 17.5rem; height: 27rem;
     background-color: var(--accentColor);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 1rem;
+    justify-items: center;
+    align-content: center;
 }
 
 #onOffButton {
