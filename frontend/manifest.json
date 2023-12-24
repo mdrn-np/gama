@@ -1,0 +1,19 @@
+{
+    "name": "GaMa",
+    "manifest_version": 3,
+    "version": "1.0",
+    "description": "anti phising extension that works af. :)",
+    "permissions": [
+      "tabs", "bookmarks", "activeTab"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["http://*/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    }
+  
+}
