@@ -13,20 +13,21 @@
 }
 
 body {
+    color: white;
     font-family: 'Lexend', sans-serif;
-    padding: 0.5rem;
-    width: 19rem; height: 27rem;
+    padding: 0.8rem 0.5rem;
+    width: 19rem; 
+    /* height: 30rem; */
     background-color: var(--accentColor);
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    row-gap: 0.7rem;
     justify-items: center;
     align-content: center;
 }
 
 #onOffButton {
-    width: 70%;
-    height: 5.6rem;
+    width: 56%;
+    height: 5rem;
     position: relative;
     display: inline-block;
 }
@@ -53,10 +54,10 @@ body {
 .roundSlider::before {
     position: absolute;
     content: "";
-    height: 4.5rem;
-    width: 4.5rem;
+    height: 4rem;
+    width: 4rem;
     top: 0.55rem;
-    left: 0.66rem;
+    left: 0.6rem;
     background-color: white;
     border-radius: 50%;
     -webkit-transition: .4s;
@@ -68,23 +69,24 @@ body {
 }
 
 #toggleCheckBox:checked + .roundSlider::before {
-    -webkit-transform: translateX(5rem);
-    -ms-transform: translateX(5rem);
-    transform: translateX(5rem);
+    -webkit-transform: translateX(4.8rem);
+    -ms-transform: translateX(4.8rem);
+    transform: translateX(4.8rem);
 }
 
 hr {
+    border: none;
+    border-radius: 1rem;
     width: 90%;
-    height: 0.3rem;
+    height: 0.2rem;
     background-color: var(--secondaryColor);
 }
 
 #siteUrl {
     background-color: var(--primaryColor);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     border-radius: 1rem;
     text-align: center;
-    display: inline;
     width: 90%;
 }
 
@@ -104,11 +106,63 @@ hr {
     column-gap: 0.3rem;
 }
 
-h5 {
-    font-size: 1.3rem;
+.detail {
+    color: white;
+    font-size: 0.7rem;
 }
 
-.detail {
-    color: var(--secondaryColor);
-    font-size: 0.7rem;
+h5 {
+    font-size: 1rem;
+}
+
+#reportContainer {
+    display: grid;
+    /* justify-content: left; */
+    width: 90%;
+}
+
+form {
+    display: grid;
+    justify-items: left;
+    row-gap: 0.2rem;
+}
+
+form label {
+    font-size: 0.9rem;
+}
+
+form input {
+    width: 90%;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 0.5rem;
+}
+
+textarea {
+    border-radius: 0.5rem;
+}
+
+form #submitBtn {
+    height: 2.5rem;
+    width: 8rem;
+    font-size: 0.95rem;
+    padding: 0.2rem;
+    color: var(--primaryColor);
+    background-color: transparent;
+    border: 2px solid var(--primaryColor);
+    border-radius: 0.5rem;
+    font-weight: bolder;
+}
+
+form #submitBtn:hover {
+    cursor: pointer;
+    background-color: var(--primaryColor);
+    color: var(--accentColor);
+    transition: .3s;
+}
+
+#urlForReport {
+    height: 1.8rem;
 }
