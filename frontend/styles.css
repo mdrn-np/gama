@@ -15,7 +15,7 @@
 body {
     color: white;
     font-family: 'Lexend', sans-serif;
-    padding: 0.8rem 0.5rem;
+    padding: 1.5rem 0.5rem;
     width: 19rem; 
     /* height: 30rem; */
     background-color: var(--accentColor);
@@ -56,7 +56,7 @@ body {
     content: "";
     height: 4rem;
     width: 4rem;
-    top: 0.55rem;
+    top: 0.5rem;
     left: 0.6rem;
     background-color: white;
     border-radius: 50%;
@@ -113,17 +113,17 @@ hr {
 
 h5 {
     font-size: 1rem;
+    text-align: center;
+    color: var(--primaryColor)
 }
 
 #reportContainer {
-    display: grid;
-    /* justify-content: left; */
     width: 90%;
 }
 
 form {
     display: grid;
-    justify-items: left;
+    justify-items: center;
     row-gap: 0.2rem;
 }
 
@@ -142,6 +142,7 @@ form input {
 
 textarea {
     border-radius: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 form #submitBtn {
