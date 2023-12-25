@@ -1,5 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
+import whoisdomain
+import pycountry
 import joblib
 from helpers import get_domain_name
 from models import PhishingReport
@@ -63,6 +65,37 @@ async def reports():
 async def update(id: int, real: bool):
 	await PhishingReport.filter(id=id).update(real=real)
 	return {'result': 'success'}
+
+
+# Get website details from whois
+@app.get('/details')
+async def whois(url: str):
+	domain = get_domain_name(url)
+	whois_data = whoisdomain.query(domain)
+	name = whois_data.name
+	registrar = whois_data.registrar
+	registrant_country = whois_data.registrant_country
+	creation_date = whois_data.creation_date.strftime('%Y/%m/%d')
+	expiration_date = whois_data.expiration_date.strftime('%Y/%m/%d')
+	last_updated = whois_data.last_updated.strftime('%Y/%m/%d')
+	dnssec = whois_data.dnssec
+	registrant = whois_data.registrant
+	emails = whois_data.emails
+	country_name = pycountry.countries.get(alpha_2=registrant_country).name
+	
+	return { 
+		"name": name,
+		"registrar": registrar, 
+		"registrant_country": registrant_country, 
+		"creation_date": creation_date,
+		"expiration_date": expiration_date,
+		"last_updated": last_updated,
+		"dnssec": dnssec,
+		"registrant": registrant, 
+		"emails": emails,
+		"country_name": country_name
+		}
+
 
 # Run API with uvicorn
 if __name__ == '__main__':
