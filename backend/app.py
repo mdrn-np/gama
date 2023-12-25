@@ -1,12 +1,13 @@
 import uvicorn
 from fastapi import FastAPI
+import csv
 import whoisdomain
 import pycountry
 import joblib
 from helpers import get_domain_name
 from models import PhishingReport
 from tortoise.contrib.fastapi import register_tortoise
-from models import PhishingReportSchema
+from models import PhishingReportSchema, reviewDetectionSchema
 
 
 app = FastAPI()
@@ -61,10 +62,17 @@ async def reports():
 	return reports
 
 #update report
-@app.put('/reports/{id}')
+@app.put('/report/{id}')
 async def update(id: int, real: bool):
-	await PhishingReport.filter(id=id).update(real=real)
-	return {'result': 'success'}
+	try:
+		await PhishingReport.filter(id=id).update(real=real)
+		if real:
+			with open('Datasets\phishing_site_urls.csv', 'a', newline='') as f:
+				writer = csv.writer(f)
+				writer.writerow(str(PhishingReport.get(id=id).url),"bad")
+		return {'result': 'success'}
+	except:
+		return {'result': 'failed'}
 
 
 # Get website details from whois
@@ -96,6 +104,10 @@ async def whois(url: str):
 		"country_name": country_name
 		}
 
+#check if a given review is real or fake on a post request that also needs a url
+@app.post('/check')
+async def check(review: reviewDetectionSchema):
+	pass
 
 # Run API with uvicorn
 if __name__ == '__main__':
