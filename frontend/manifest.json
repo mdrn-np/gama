@@ -4,7 +4,7 @@
     "version": "1.0",
     "description": "anti phising extension that works af. :)",
     "permissions": [
-      "tabs", "bookmarks", "activeTab"
+      "tabs", "activeTab", "contextMenus"
     ],
     "content_scripts": [
       {
@@ -12,6 +12,10 @@
         "js": ["contentScript.js"]
       }
     ],
+    "background": {
+      "js": "backgorund.js",
+      "type": "module"
+    },
     "action": {
       "default_popup": "popup.html"
     }
