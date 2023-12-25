@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+import csv
 import whoisdomain
 import pycountry
 import joblib
@@ -61,9 +62,13 @@ async def reports():
 	return reports
 
 #update report
-@app.put('/reports/{id}')
+@app.put('/report/{id}')
 async def update(id: int, real: bool):
 	await PhishingReport.filter(id=id).update(real=real)
+	if real:
+		with open('Datasets\phishing_site_urls.csv', 'a', newline='') as f:
+			writer = csv.writer(f)
+			writer.writerow(str(PhishingReport.get(id=id).url),"bad")
 	return {'result': 'success'}
 
 
