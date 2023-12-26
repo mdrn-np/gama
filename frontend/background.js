@@ -13,3 +13,10 @@ chrome.runtime.onInstalled.addListener(() => {
   })
   console.log('test')
 })
+
+chrome.contextMenus.onClicked.addListener((clickData) => {
+  if (clickData.menuItemId == "validate" && clickData.selectionText) {
+    let review = clickData.selectionText;
+    console.log(review)
+  }
+})
