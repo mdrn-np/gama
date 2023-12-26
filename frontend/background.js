@@ -1,9 +1,11 @@
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  // returns active tab only
-  let activeTab = tabs[0];
-  let activeTabUrl = activeTab.url
-  console.log(activeTabUrl)
-});
+chrome.tabs.onActivated.addListener(() => {
+  // returns active tab's url
+  chrome.tabs.query({highlighted: true}, (tabs) => {
+    let activeTab = tabs[0]
+    let activeTabUrl = activeTab.url;
+    console.log(activeTabUrl)
+  })
+})
 
 chrome.runtime.onInstalled.addListener(() => {
   // adds context menu needed for our extension on installation
