@@ -6,6 +6,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 });
 
 chrome.runtime.onInstalled.addListener(() => {
+  // adds context menu needed for our extension on installation
   chrome.contextMenus.create({
     "id": "validate",
     "title": "validate",
@@ -15,6 +16,7 @@ chrome.runtime.onInstalled.addListener(() => {
 })
 
 chrome.contextMenus.onClicked.addListener((clickData) => {
+  // extracts the selected / highlighted value
   if (clickData.menuItemId == "validate" && clickData.selectionText) {
     let review = clickData.selectionText;
     console.log(review)
