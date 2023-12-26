@@ -4,7 +4,7 @@ import csv
 import whoisdomain
 import pycountry
 import joblib
-from helpers import get_domain_name
+from helpers import get_domain_name, reviewTester
 from models import PhishingReport
 from tortoise.contrib.fastapi import register_tortoise
 from models import PhishingReportSchema, reviewDetectionSchema
@@ -105,9 +105,11 @@ async def whois(url: str):
 		}
 
 #check if a given review is real or fake on a post request that also needs a url
-@app.post('/check')
+@app.post('/review')
 async def check(review: reviewDetectionSchema):
-	pass
+	prediction = reviewTester(review.review)
+	return {'prediction': f'{prediction}'}
+
 
 # Run API with uvicorn
 if __name__ == '__main__':
