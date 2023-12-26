@@ -5,10 +5,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   console.log(activeTabUrl)
 });
 
-let contextMenuItem = {
-  "id": "validate",
-  "title": "validate",
-  "contexts": ["selection"]
-}
-
-chrome.contextMenus.create(contextMenuItem)
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    "id": "validate",
+    "title": "validate",
+    "contexts": ["selection"]
+  })
+  console.log('test')
+})
