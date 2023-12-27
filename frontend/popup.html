@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <title>GaMa</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- button to toggle on and off -->
     <label id="onOffButton">
-        <input id="toggleCheckBox" type="checkbox">
-        <span class="roundSlider"></span>
+      <input id="toggleCheckBox" type="checkbox" />
+      <span class="roundSlider"></span>
     </label>
 
-    <hr>
+    <hr />
 
     <p id="siteUrl"><a href="https">https://google.com</a></p>
-    
+
     <!-- details of the site  -->
     <div id="detailsContainer">
-        <p class="detail d1">First seen: </p>
-        <p class="detail d2">Host: </p>
-        <p class="detail d3">Country: </p>
-        <p class="detail d4">Organization: </p>
+      <p class="detail d1">First seen:</p>
+      <p class="detail d2">Host:</p>
+      <p class="detail d3">Country:</p>
+      <p class="detail d4">Organization:</p>
     </div>
-    
-    <hr>
-    
-    <div id="reportContainer">
-        <h5>Report site</h5>
 
-        <form action="">
-            <label for="urlForReport">Url of the site:</label>
-            <input type="text" name="urlForReport" id="urlForReport" value="url">
-            <label for="reason">Specify your reason:</label>
-            <textarea name="reason" id="reason" cols="24" rows="3"></textarea>
-            <button id="submitBtn">Submit Report</button>
-        </form>
+    <hr />
+
+    <div id="reportContainer">
+      <h5>Report site</h5>
+
+      <form action="">
+        <label for="urlForReport">Url of the site:</label>
+        <input type="text" name="urlForReport" id="urlForReport" value="url" />
+        <label for="reason">Specify your reason:</label>
+        <textarea name="reason" id="reason" cols="24" rows="3"></textarea>
+        <button id="submitBtn">Submit Report</button>
+      </form>
     </div>
-</body>
+    <script src="popup.js"></script>
+  </body>
 </html>

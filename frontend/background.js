@@ -1,8 +1,9 @@
 let activeTabUrl = "";
+let phishing;
 
-chrome.tabs.onActivated.addListener(() => {
+chrome.tabs.onActivated.addListener(async () => {
   // returns active tab's url
-  chrome.tabs.query({ highlighted: true }, (tabs) => {
+  chrome.tabs.query({ highlighted: true }, async (tabs) => {
     let activeTab = tabs[0];
     activeTabUrl = activeTab.url;
     console.log(activeTabUrl);
@@ -12,13 +13,15 @@ chrome.tabs.onActivated.addListener(() => {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
+        return data;
       } catch (error) {
         console.error(error);
+        return false;
       }
     }
     let phishing_url = `${server_url}phishing?url=${activeTabUrl}`;
-    let phishing = checkPhishing(phishing_url);
+    phishing = await checkPhishing(phishing_url);
+    console.log(phishing);
   });
 });
 
