@@ -31,8 +31,13 @@ chrome.tabs.onUpdated.addListener(async () => {
 chrome.runtime.onInstalled.addListener(() => {
   // adds context menu needed for our extension on installation
   chrome.contextMenus.create({
-    id: "validate",
-    title: "validate",
+    id: "review_check",
+    title: "Review Check",
+    contexts: ["selection"],
+  });
+  chrome.contextMenus.create({
+    id: "news_check",
+    title: "News Check",
     contexts: ["selection"],
   });
   console.log("test");
@@ -40,12 +45,12 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((clickData) => {
   // extracts the selected / highlighted value
-  if (clickData.menuItemId == "validate" && clickData.selectionText) {
+  if (clickData.menuItemId == "review_check" && clickData.selectionText) {
     let review = clickData.selectionText;
     const review_url = `${server_url}review`;
 
     let reviewData = {
-      review: review,
+      review: `${review}`,
     };
 
     fetch(review_url, {
@@ -57,9 +62,25 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data.result);
+        console.log(data.prediction);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.log(error));
     console.log(review);
+  } else if (clickData.menuItemId == "news_check" && clickData.selectionText) {
+    let news = clickData.selectionText;
+    const news_url = `${server_url}news?news=${news}`;
+
+    fetch(news_url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.prediction.prediction);
+      })
+      .catch((error) => console.log(error));
+    console.log(news);
   }
 });

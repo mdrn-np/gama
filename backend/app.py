@@ -5,10 +5,12 @@ import csv
 import whoisdomain
 import pycountry
 from tortoise.contrib.fastapi import register_tortoise
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Local files
 from helpers import get_domain_name, reviewTester, phish_model_ls
-from models import PhishingReportSchema, reviewDetectionSchema, PhishingReport
+from models import PhishingReportSchema, reviewDetectionSchema, PhishingReport, newsDetectionSchema
 from news_predictor import PredictionModel
 
 # Initialize FastAPI
@@ -23,7 +25,14 @@ register_tortoise(
     add_exception_handlers=True
 )
 
-
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],
+)
 # API root
 @app.get('/')
 async def index():
@@ -118,21 +127,33 @@ async def update(id: int, real: bool):
 @app.get('/details')
 async def whois(url: str):
 	domain = get_domain_name(url)
-	whois_data = whoisdomain.query(domain)
-	name = whois_data.name
-	registrar = whois_data.registrar
-	registrant_country = whois_data.registrant_country
-	creation_date = whois_data.creation_date.strftime('%Y/%m/%d')
-	expiration_date = whois_data.expiration_date.strftime('%Y/%m/%d')
-	last_updated = whois_data.last_updated.strftime('%Y/%m/%d')
-	dnssec = whois_data.dnssec
-	registrant = whois_data.registrant
-	emails = whois_data.emails
 	try:
-		country_name = pycountry.countries.get(alpha_2=registrant_country).name
+		whois_data = whoisdomain.query(domain)
+		name = whois_data.name
+		registrar = whois_data.registrar
+		registrant_country = whois_data.registrant_country
+		creation_date = whois_data.creation_date.strftime('%Y/%m/%d')
+		expiration_date = whois_data.expiration_date.strftime('%Y/%m/%d')
+		last_updated = whois_data.last_updated.strftime('%Y/%m/%d')
+		dnssec = whois_data.dnssec
+		registrant = whois_data.registrant
+		emails = whois_data.emails
+		try:
+			country_name = pycountry.countries.get(alpha_2=registrant_country).name
+		except:
+			country_name = 'Unknown'
+		
 	except:
+		name = 'Unknown'
+		registrar = 'Unknown'
+		registrant_country = 'Unknown'
+		creation_date = 'Unknown'
+		expiration_date = 'Unknown'
+		last_updated = 'Unknown'
+		dnssec = 'Unknown'
+		registrant = 'Unknown'
+		emails = 'Unknown'
 		country_name = 'Unknown'
-	
 	print(name, registrar, registrant_country, creation_date, expiration_date, last_updated, dnssec, registrant, emails, country_name)	
 	return { 
 		"name": name,
@@ -152,11 +173,12 @@ async def whois(url: str):
 @app.post('/review')
 async def check(review: reviewDetectionSchema):
 	prediction = reviewTester(review.review)
+	print(prediction)
 	return {'prediction': f'{prediction}'}
 
 #check if a given news is real or fake on a post request that only needs a news
 @app.post('/news')
-async def check(news: str):
+async def check(news: newsDetectionSchema):
 	if len(news) > 30:
 		model = PredictionModel(news)
 		prediction = model.predict()

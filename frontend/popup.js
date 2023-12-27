@@ -24,7 +24,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       ).innerText = `Organization : ${data.registrant}`;
       document.getElementById("siteUrl").innerText = `${data.domain}`;
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.log(error));
 });
 
 const report_url = `${server_url}report`;
@@ -41,6 +41,7 @@ document.getElementById("submitReport").addEventListener("click", function () {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(reportData),
+    mode: "no-cors", // Add this line
   })
     .then((response) => response.json())
     .then((data) => {
