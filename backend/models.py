@@ -23,7 +23,11 @@ class PhishingReportSchema(BaseModel):
         orm_mode = True
 
 class reviewDetectionSchema(BaseModel):
-    url: str
+    review: str
+
+    class Config:
+        orm_mode = False
+class newsDetectionSchema(BaseModel):
     review: str
 
     class Config:
