@@ -3,7 +3,7 @@
   "manifest_version": 3,
   "version": "1.0",
   "description": "anti fraud extension that protects you from phising sites, verifies reviews and news sources so you can navigate web through confidence",
-  "permissions": ["tabs", "activeTab", "contextMenus", "scripting"],
+  "permissions": ["tabs", "activeTab", "contextMenus", "notifications"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -12,6 +12,9 @@
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "32":"logo.png"
   },
   "action": {
     "default_popup": "popup.html",
