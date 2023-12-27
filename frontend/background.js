@@ -109,4 +109,4 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .catch((error) => console.log(error));
     console.log(news);
   }
-});s
+});
