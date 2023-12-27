@@ -130,6 +130,7 @@ async def whois(url: str):
 	emails = whois_data.emails
 	country_name = pycountry.countries.get(alpha_2=registrant_country).name
 	
+	print(name, registrar, registrant_country, creation_date, expiration_date, last_updated, dnssec, registrant, emails, country_name)	
 	return { 
 		"name": name,
 		"registrar": registrar, 
