@@ -1,5 +1,5 @@
+const server_url = "http://localhost:8000/";
 let activeTabUrl = "";
-let phishing;
 
 chrome.tabs.onUpdated.addListener(async () => {
   // returns active tab's url
@@ -7,7 +7,6 @@ chrome.tabs.onUpdated.addListener(async () => {
     let activeTab = tabs[0];
     activeTabUrl = activeTab.url;
     console.log(activeTabUrl);
-    const server_url = "http://localhost:8000/";
 
     async function checkPhishing(url) {
       try {
@@ -43,6 +42,24 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
   // extracts the selected / highlighted value
   if (clickData.menuItemId == "validate" && clickData.selectionText) {
     let review = clickData.selectionText;
+    const review_url = `${server_url}review`;
+
+    let reviewData = {
+      review: review,
+    };
+
+    fetch(review_url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviewData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.result);
+      })
+      .catch((error) => console.error(error));
     console.log(review);
   }
 });
