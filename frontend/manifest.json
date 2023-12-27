@@ -2,7 +2,7 @@
   "name": "GaMa",
   "manifest_version": 3,
   "version": "1.0",
-  "description": "anti phising extension that works af. :)",
+  "description": "anti fraud detection Extension for you online safety.",
   "permissions": ["tabs", "activeTab", "contextMenus", "notifications"],
   "content_scripts": [
     {
