@@ -1,31 +1,37 @@
 const server_url = "http://localhost:8000/";
 let activeTabUrl = "";
+let onoffstate;
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  onoffstate = message.checkboxState;
+});
 
-chrome.tabs.onActivated.addListener(async () => {
-  // returns active tab's url
-  chrome.tabs.query({ highlighted: true }, async (tabs) => {
-    let activeTab = tabs[0];
-    activeTabUrl = activeTab.url;
-    console.log(activeTabUrl);
+chrome.tabs.onUpdated.addListener(async () => {
+  if (onoffstate == "unchecked") {
+    // returns active tab's url
+    chrome.tabs.query({ highlighted: true }, async (tabs) => {
+      let activeTab = tabs[0];
+      activeTabUrl = activeTab.url;
+      console.log(activeTabUrl);
 
-    async function checkPhishing(url) {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.log(error);
-        return false;
+      async function checkPhishing(url) {
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
       }
-    }
-    let phishing_url = `${server_url}phishing?url=${activeTabUrl}`;
-    phishing = await checkPhishing(phishing_url);
+      let phishing_url = `${server_url}phishing?url=${activeTabUrl}`;
+      phishing = await checkPhishing(phishing_url);
 
-    if (phishing) {
-      chrome.tabs.update({ url: "override.html" });
-    }
-    console.log(phishing);
-  });
+      if (phishing) {
+        chrome.tabs.update({ url: "override.html" });
+      }
+      console.log(phishing);
+    });
+  }
 });
 
 chrome.runtime.onInstalled.addListener(() => {

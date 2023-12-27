@@ -15,6 +15,15 @@ class PhishingReport(Model):
     class Meta:
         table = "phishing reports"
 
+class mistakePhishingReport(Model):
+    id = fields.IntField(pk=True)
+    url = fields.CharField(max_length=512)
+    reason = fields.TextField(null=True)
+    real = fields.BooleanField(default=False)
+    created_at = fields.DatetimeField(default=datetime.now)
+
+    class Meta:
+        table = "Mistake phishing reports"
 class PhishingReportSchema(BaseModel):
     url: str
     reason: str

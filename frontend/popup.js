@@ -52,3 +52,27 @@ document.getElementById("submitReport").addEventListener("click", function () {
     })
     .catch((error) => console.error(error));
 });
+
+// Get the checkbox element
+let checkbox = document.getElementById("toggleCheckBox");
+
+// Load the checkbox state from localStorage
+let checkboxState = localStorage.getItem("checkboxState");
+
+// If the checkbox state is "checked", check the checkbox
+if (checkboxState === "checked") {
+  checkbox.checked = true;
+}
+
+// Add an event listener for the change event
+checkbox.addEventListener("change", function () {
+  // If the checkbox is checked, store the state as "checked"
+  if (checkbox.checked) {
+    localStorage.setItem("checkboxState", "checked");
+  }
+  // If the checkbox is not checked, store the state as "unchecked"
+  else {
+    localStorage.setItem("checkboxState", "unchecked");
+  }
+  chrome.runtime.sendMessage({ checkboxState: checkboxState });
+});

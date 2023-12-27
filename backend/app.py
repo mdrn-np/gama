@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Local files
 from helpers import get_domain_name, reviewTester, phish_model_ls
-from models import PhishingReportSchema, reviewDetectionSchema, PhishingReport, newsDetectionSchema
+from models import PhishingReportSchema, reviewDetectionSchema, PhishingReport, newsDetectionSchema, mistakePhishingReport
 from news_predictor import PredictionModel
 
 # Initialize FastAPI
@@ -102,6 +102,22 @@ async def report(report: PhishingReportSchema):
 	report = PhishingReport(url=domain, reason=report.reason)
 	await report.save()
 	return {'result': 'success'}
+
+
+# report mistake phishing and save to database
+@app.post('/report_mistake')
+async def report_mistake(report: PhishingReportSchema):
+	domain = get_domain_name(report.url)
+	reports = await mistakePhishingReport.all()
+	urls = [report.url for report in reports]
+	if domain in urls:
+		return {'result': 'already reported'}
+	elif not domain:
+		return {'result': 'invalid url'}
+	report = mistakePhishingReport(url=domain, reason=report.reason, real=True)
+	await report.save()
+	return {'result': 'success'}
+
 
 #get all reports
 @app.get('/reports')
