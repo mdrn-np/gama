@@ -4,11 +4,10 @@ from fastapi import FastAPI
 import csv
 import whoisdomain
 import pycountry
-import joblib
 from tortoise.contrib.fastapi import register_tortoise
 
 # Local files
-from helpers import get_domain_name, reviewTester
+from helpers import get_domain_name, reviewTester, phish_model_ls
 from models import PhishingReportSchema, reviewDetectionSchema, PhishingReport
 from news_predictor import PredictionModel
 
@@ -18,14 +17,12 @@ app = FastAPI()
 # Connect to database
 register_tortoise(
     app,
-    db_url="sqlite://db.sqlite3",
+    db_url="sqlite://db\db.sqlite3",
     modules={"models": ["models"]},
     generate_schemas=True,
     add_exception_handlers=True
 )
-# Load Model
-phish_model = open('phishing.pkl','rb')
-phish_model_ls = joblib.load(phish_model)
+
 
 # API with prediction
 @app.get('/phishing')

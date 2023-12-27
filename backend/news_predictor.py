@@ -8,9 +8,9 @@ ps = PorterStemmer()
 nltk.data.path.append('./nltk_data')
 
 
-model = joblib.load('fakeNewsModel.pkl')
+model = joblib.load('MLModels\\' + 'fakeNewsModel.pkl')
 print('=> Pickle Loaded : Model ')
-tfidfvect = joblib.load('fakeNewsVectorizer.pkl')
+tfidfvect = joblib.load('MLModels\\' + 'fakeNewsVectorizer.pkl')
 print('=> Pickle Loaded : Vectorizer')
 
 
