@@ -15,12 +15,16 @@ chrome.tabs.onActivated.addListener(async () => {
         const data = await response.json();
         return data;
       } catch (error) {
-        console.error(error);
+        console.log(error);
         return false;
       }
     }
     let phishing_url = `${server_url}phishing?url=${activeTabUrl}`;
     phishing = await checkPhishing(phishing_url);
+
+    if (phishing) {
+      chrome.tabs.update(tabId, { url: '../forOverride/override.html' });
+    }
     console.log(phishing);
   });
 });
