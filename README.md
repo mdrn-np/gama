@@ -39,6 +39,93 @@ To deploy this project run
   # Now the local server should be running
 ```
 
+## Use of some thechnologies and why?
+
+| Libraries Used   | Why?                                                                                                                                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fast API         | We Used to fast api. Because it is very light weight and also new!, we also went with a api approach so that other developers can use our api to integrate it in thier own applications                   |
+| Sk Learn         | Since our data set was quite small . We went with sklearn rather than tensorflow. Also with our limited hardware we could train with it easier than tensorflow that utilizes heavy & expensive cuda cores |
+| Whois            | We choose whois cli instead of an api because we wanted to keep this as free as possible and also keep the delay between front & backend small.                                                           |
+| Chrome extention | we went with chrome extension to make this as usable as possbile & reach as many people as possible we are planning to add firefox in the future so that it reaches mobie uses too                        |
+
+## File tree
+
+```
+gama/
+├─ .github/
+│  ├─ 0.png
+│  ├─ 10.png
+│  ├─ 11.png
+│  ├─ 12.png
+│  ├─ 8.png
+│  ├─ 9.png
+│  ├─ image-1.png
+│  ├─ image-2.png
+│  ├─ image-3.png
+│  ├─ image-4.png
+│  ├─ image-5.png
+│  ├─ image-6.png
+│  └─ image-7.png
+├─ .gitignore
+├─ LICENSE
+├─ README.md
+├─ backend/
+│  ├─ Datasets/
+│  │  ├─ amazon_reviews_2019.csv
+│  │  ├─ fake_news_dataset.csv
+│  │  └─ phishing_site_urls.csv
+│  ├─ MLModels/
+│  │  ├─ fakeNewsModel.pkl
+│  │  ├─ fakeNewsVectorizer.pkl
+│  │  ├─ phishing.pkl
+│  │  ├─ reviewModel.pkl
+│  │  └─ reviewVecotorizer.pkl
+│  ├─ app.py
+│  ├─ db/
+│  │  └─ db.sqlite3
+│  ├─ helpers.py
+│  ├─ models.py
+│  └─ news_predictor.py
+├─ frontend/
+│  ├─ background.js
+│  ├─ contentScript.js
+│  ├─ logo.png
+│  ├─ manifest.json
+│  ├─ override.html
+│  ├─ overrideJs.js
+│  ├─ overrideStyles.css
+│  ├─ popup.html
+│  ├─ popup.js
+│  └─ styles.css
+├─ proposal.pdf
+└─ requirements.txt
+```
+
+- .github/ contains all of the images needed for github read me
+- backend/ contains the backend code
+  - datasets/ contains all data sets used to train our models
+  - MLModels/ contains all the machine learning models
+- Fronend/
+  - contains code for extention
+
+## Python files
+
+### app.py
+
+Contains all the code for running the fast api server.
+
+### helpers.py
+
+Contains all the helper function & Review model with its text pre processor
+
+### news_predictor.py
+
+Contains the class for preding if a news is Fake or not.
+
+### models.py
+
+Contains database models and pydantic shecma models.
+
 ## API Reference
 
 #### Check For phishing
@@ -145,57 +232,58 @@ To deploy this project run
 | id        | integer | the id of the report to be made ture or false |
 | real      | bool    | The boolen value of the report to be set.     |
 
-## How to use the extention
+# How to use the extention
 
-After the server has been set up. Add the frontend extention to your web browser
-. Make sure that developer mode is enabled.
+- After the server has been set up. Add the frontend extention to your web browser
+  . Make sure that developer mode is enabled.
 
 ![Alt text](.github/0.png)
 
-Now Load unpacked
+- Now Load unpacked
 
 ![Alt text](.github/image-1.png)
 
-Now select the frontend folder from gama directory
+- Now select the frontend folder from gama directory
 
 ![Alt text](.github/image-2.png)
 
-Now the extention should be installed. go ahead and pin it. so:
+- Now the extention should be installed. go ahead and pin it. so:
 
 ![Alt text](.github/image-3.png)
 
-Now the extention is installed!
+- Now the extention is installed!
 
 ![Alt text](.github/image-4.png)
 
-Your extention should be shown like this with details
+- Your extention should be shown like this with details
 
 ![Alt text](.github/image-5.png)
 
-Now whenever you visit a suspisous site the above screen is shown protecting you from online threats
+- Now whenever you visit a suspisous site the above screen is shown protecting you from online threats
 
-If you wish to Disable this just click the checkbox
+- If you wish to Disable this just click the checkbox
 
 ![Alt text](.github/image-6.png)
 
-If you ever find a site that seems suspicous you can report it by just reporting it in the textbox like so:
+- If you ever find a site that seems suspicous you can report it by just reporting it in the textbox like so:
 
 ![Alt text](.github/image-7.png)
 
-If you want to check for a fake review then highlight the text and right click
+- If you want to check for a fake review then highlight the text and right click
 
 ![Alt text](.github/8.png)
 
-Now click on gama and click on Review check
+- Now click on gama and click on Review check
 
 ![Alt text](.github/9.png)
-Now you should get a notification like this:
+
+- Now you should get a notification like this:
 
 ![Alt text](.github/10.png)
 
-If you would like to check for fake news follow the same process just click on news check :
-![Alt text](.github/11.png)
-Then you should get a notification like this
+- If you would like to check for fake news follow the same process just click on news check :
+  ![Alt text](.github/11.png)
+- Then you should get a notification like this
 
 ![Alt text](.github/12.png)
 
@@ -204,6 +292,12 @@ Then you should get a notification like this
 - The python server is easily uploadable to the web & serve use through online apis
 - The apis can be used by 3rd party apps too.
 - The machine learning models are trained on datasets found on kaggle (With the creators permission )
+
+## Model accuracies (pre tested)
+
+- Fake News Model : 81.23%
+- Phishing Detector Model : 78.93%
+- Fake Review Model : 73.22%
 
 ## License
 
