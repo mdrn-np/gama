@@ -1,7 +1,7 @@
 let activeTabUrl = "";
 let phishing;
 
-chrome.tabs.onActivated.addListener(async () => {
+chrome.tabs.onUpdated.addListener(async () => {
   // returns active tab's url
   chrome.tabs.query({ highlighted: true }, async (tabs) => {
     let activeTab = tabs[0];
@@ -23,7 +23,7 @@ chrome.tabs.onActivated.addListener(async () => {
     phishing = await checkPhishing(phishing_url);
 
     if (phishing) {
-      chrome.tabs.update(tabId, { url: '../forOverride/override.html' });
+      chrome.tabs.update({ url: "override.html" });
     }
     console.log(phishing);
   });

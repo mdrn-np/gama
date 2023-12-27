@@ -21,20 +21,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       document.getElementById(
         "detail-4"
       ).innerText = `Organization : ${data.registrant}`;
-      //   document.getElementById(
-      //     "detail-5"
-      //   ).innerText = `Expiration Date: ${data.expiration_date}`;
-      //   document.getElementById(
-      //     "detail-6"
-      //   ).innerText = `Last Updated: ${data.last_updated}`;
-      //   document.getElementById("detail-7").innerText = `DNSSEC: ${data.dnssec}`;
-      //   document.getElementById(
-      //     "detail-8"
-      //   ).innerText = `Registrant: ${data.registrant}`;
-      //   document.getElementById("detail-9").innerText = `Emails: ${data.emails}`;
-      //   document.getElementById(
-      //     "detail-10"
-      //   ).innerText = `Country Name: ${data.country_name}`;
+      document.getElementById("siteUrl").innerText = `${data.domain}`;
     })
     .catch((error) => console.error(error));
 });

@@ -128,7 +128,10 @@ async def whois(url: str):
 	dnssec = whois_data.dnssec
 	registrant = whois_data.registrant
 	emails = whois_data.emails
-	country_name = pycountry.countries.get(alpha_2=registrant_country).name
+	try:
+		country_name = pycountry.countries.get(alpha_2=registrant_country).name
+	except:
+		country_name = 'Unknown'
 	
 	print(name, registrar, registrant_country, creation_date, expiration_date, last_updated, dnssec, registrant, emails, country_name)	
 	return { 
@@ -141,7 +144,8 @@ async def whois(url: str):
 		"dnssec": dnssec,
 		"registrant": registrant, 
 		"emails": emails,
-		"country_name": country_name
+		"country_name": country_name,
+		"domain" : domain
 		}
 
 #check if a given review is real or fake on a post request that also needs a url
