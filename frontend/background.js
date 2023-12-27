@@ -69,15 +69,16 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.prediction);
-        
-        chrome.notifications.create('installation', {
-          type: 'basic',
-          iconUrl: 'logo.png',
-          title: 'Validation of review',
-          message: function() {return data.prediction? 'The review is authentic':'The review is likely fake'},
-          priority: 1
-        })
 
+        chrome.notifications.create("installation", {
+          type: "basic",
+          iconUrl: "logo.png",
+          title: "Review Validation",
+          message: data.prediction
+            ? "The review is authentic"
+            : "The review is likely fake (take it with a grain of salt)",
+          priority: 1,
+        });
       })
       .catch((error) => console.log(error));
     console.log(review);
@@ -96,15 +97,16 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.prediction);
-        chrome.tabs.query(
-          { active: true, currentWindow: true },
-          function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-              prediction: data.prediction,
-            });
-          }
-        );
+        chrome.notifications.create("installation", {
+          type: "basic",
+          iconUrl: "logo.png",
+          title: "News Validation",
+          message:
+            data.prediction == "REAL"
+              ? "The News is likely authentic"
+              : "The News is likely fake (fact checking is recommonded)",
+          priority: 1,
+        });
       })
       .catch((error) => console.log(error));
     console.log(news);

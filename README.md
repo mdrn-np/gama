@@ -150,7 +150,7 @@ To deploy this project run
 After the server has been set up. Add the frontend extention to your web browser
 . Make sure that developer mode is enabled.
 
-![Alt text](.github/image.png)
+![Alt text](.github/0.png)
 
 Now Load unpacked
 
@@ -182,6 +182,23 @@ If you ever find a site that seems suspicous you can report it by just reporting
 
 ![Alt text](.github/image-7.png)
 
+If you want to check for a fake review then highlight the text and right click
+
+![Alt text](.github/8.png)
+
+Now click on gama and click on Review check
+
+![Alt text](.github/9.png)
+Now you should get a notification like this:
+
+![Alt text](.github/10.png)
+
+If you would like to check for fake news follow the same process just click on news check :
+![Alt text](.github/11.png)
+Then you should get a notification like this
+
+![Alt text](.github/12.png)
+
 ## Appendix
 
 - The python server is easily uploadable to the web & serve use through online apis
@@ -192,8 +209,14 @@ If you ever find a site that seems suspicous you can report it by just reporting
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+## Refrences
+
+Thank you manideep2510 for letting us use their pre-trained fake news detection model
+
+> [His repo](https://github.com/manideep2510/siamese-BERT-fake-news-detection-LIAR)
+
 ## Authors
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@phuyalgaurav90](https://www.github.com/phuyalgaurav90)
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@munannoo](https://www.github.com/munannoo)

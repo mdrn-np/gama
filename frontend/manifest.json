@@ -14,13 +14,10 @@
     "service_worker": "background.js"
   },
   "icons": {
-    "32":"logo.png"
+    "32": "logo.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": "logo.png"
-  },
-  "icons": {
-    "32": "logo.png"
   }
 }
