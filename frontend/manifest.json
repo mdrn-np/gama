@@ -3,7 +3,7 @@
   "manifest_version": 3,
   "version": "1.0",
   "description": "anti phising extension that works af. :)",
-  "permissions": ["tabs", "activeTab", "contextMenus"],
+  "permissions": ["tabs", "activeTab", "contextMenus", "notifications"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

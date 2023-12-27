@@ -69,6 +69,17 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.prediction);
+        
+        let notifOption = {
+          type: 'basic',
+          iconUrl: 'logo.png',
+          title: function() {
+            data.result? 'Review is likely fake':'Review is valid'
+          },
+          message: 'from GAMA extension'
+        }
+        chrome.notifications.create(notifOption)
+
       })
       .catch((error) => console.log(error));
     console.log(review);
@@ -92,4 +103,4 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .catch((error) => console.log(error));
     console.log(news);
   }
-});
+});s
