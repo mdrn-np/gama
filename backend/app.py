@@ -24,6 +24,45 @@ register_tortoise(
 )
 
 
+# API root
+@app.get('/')
+async def index():
+	return {
+		"GET": {
+			"/phishing": "Takes a URL as a parameter and returns True if the website is phishing, False if it is not.",
+			"/reports": "Returns all the reports the users have reported.",
+			"/details": "Takes a URL as a parameter and returns details about the domain such as name, registrar, registrant country, creation date, expiration date, last updated, dnssec, registrant, emails, and country name."
+		},
+		"POST": {
+			"/report": {
+				"description": "Takes a URL and a reason as parameters and reports a website. Returns 'already reported' if the website has already been reported, 'invalid url' if the URL is invalid, and 'success' if the report was successful.",
+				"format": {
+					"url": "www.example.com",
+					"Reason": "very bad example."
+				}
+			},
+			"/review": {
+				"description": "Takes a URL and a review as parameters and checks if the review is fake. Returns True if the review is fake, False if it is legit.",
+				"format": {
+					"url": "www.example.com",
+					"review": "very bad example."
+				}
+			},
+			"/news": {
+				"description": "Takes a news text as a parameter and checks if the news is fake. Returns True if the news is fake, False if it is legit.",
+				"format": {
+					"news": "This might be a real or fake news"
+				}
+			}
+		},
+		"PUT": {
+			"/reports/{id}": {
+				"description": "Takes an id and a boolean value as parameters and sets the validity of the report. Returns 'success' if the operation was successful, 'failed' if it was not.",
+				"format": "/reports/{id}?real={true || false}"
+			}
+		}
+	}
+
 # API with prediction
 @app.get('/phishing')
 async def predict(url: str):
