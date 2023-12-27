@@ -5,7 +5,7 @@ import whoisdomain
 import pycountry
 import joblib
 from helpers import get_domain_name, reviewTester
-from models import PhishingReport
+from models import PhishingReport, classifyFakeNews
 from tortoise.contrib.fastapi import register_tortoise
 from models import PhishingReportSchema, reviewDetectionSchema
 
@@ -110,6 +110,11 @@ async def check(review: reviewDetectionSchema):
 	prediction = reviewTester(review.review)
 	return {'prediction': f'{prediction}'}
 
+#check if a given news is real or fake on a post request that only needs a news
+@app.post('/news')
+async def check(news: str):
+	prediction = classifyFakeNews(news)
+	return {'prediction': prediction }
 
 # Run API with uvicorn
 if __name__ == '__main__':
