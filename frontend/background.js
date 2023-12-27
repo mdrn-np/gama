@@ -99,6 +99,14 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.prediction);
+        chrome.tabs.query(
+          { active: true, currentWindow: true },
+          function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+              prediction: data.prediction,
+            });
+          }
+        );
       })
       .catch((error) => console.log(error));
     console.log(news);
