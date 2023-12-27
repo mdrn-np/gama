@@ -1,7 +1,7 @@
 const server_url = "http://localhost:8000/";
 let activeTabUrl = "";
 
-chrome.tabs.onUpdated.addListener(async () => {
+chrome.tabs.onActivated.addListener(async () => {
   // returns active tab's url
   chrome.tabs.query({ highlighted: true }, async (tabs) => {
     let activeTab = tabs[0];
@@ -68,17 +68,20 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
     console.log(review);
   } else if (clickData.menuItemId == "news_check" && clickData.selectionText) {
     let news = clickData.selectionText;
-    const news_url = `${server_url}news?news=${news}`;
-
+    const news_url = `${server_url}news`;
+    let newsData = {
+      news: `${news}`,
+    };
     fetch(news_url, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(newsData),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.prediction.prediction);
+        console.log(data.prediction);
       })
       .catch((error) => console.log(error));
     console.log(news);

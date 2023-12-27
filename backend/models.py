@@ -28,7 +28,7 @@ class reviewDetectionSchema(BaseModel):
     class Config:
         orm_mode = False
 class newsDetectionSchema(BaseModel):
-    review: str
+    news: str
 
     class Config:
         orm_mode = False

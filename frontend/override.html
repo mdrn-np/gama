@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="overrideStyles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="overrideStyles.css" />
     <title>GAMA: ALERT</title>
-</head>
-<body class="container">
+  </head>
+  <body class="container">
     <div class="row">
-        <div class="col">
-            <h1>POSSIBLY A PHISING SITE</h1>
-        </div>
+      <div class="col">
+        <h1>POSSIBLY A PHISING SITE</h1>
+      </div>
     </div>
 
     <div class="row justify-content-md-center">
-        <div id="reportContainer" class="container">
-            <div class="row">
-                <div class="col align-self-center">
-                    <h3>Not a Phising site? Report below</h3>
-                </div>
-                <div class="col align-self-center">
-                    <textarea name="" id="reportBox"></textarea>
-                </div>
-                <div class="col">
-                    <button type="button" id="reportBtn" class="btn btn-outline-danger btn-lg">Report!</button>                
-                </div>
-            </div>
+      <div id="reportContainer" class="container">
+        <div class="row">
+          <div class="col align-self-center">
+            <h3>Not a Phising site? Report below</h3>
+          </div>
+          <div class="col align-self-center">
+            <textarea name="" id="reportBox"></textarea>
+          </div>
+          <div class="col">
+            <button
+              type="button"
+              id="reportBtn"
+              class="btn btn-outline-danger btn-lg"
+            >
+              Report!
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <button id="proceedBtn" class="btn btn-outline-danger btn-lg">FORCE PROCEED TO SITE (unsafe) -></button>
+    <button
+      id="proceedBtn"
+      class="btn btn-outline-danger btn-lg"
+      onclick="window.history.go(-1); return false;"
+    >
+      FORCE PROCEED TO SITE (unsafe) ->
+    </button>
 
-    <script src="overrideJs.js"></script> 
-</body>
+    <script src="overrideJs.js"></script>
+  </body>
 </html>

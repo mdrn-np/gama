@@ -179,9 +179,9 @@ async def check(review: reviewDetectionSchema):
 #check if a given news is real or fake on a post request that only needs a news
 @app.post('/news')
 async def check(news: newsDetectionSchema):
-	if len(news) > 30:
-		model = PredictionModel(news)
-		prediction = model.predict()
+	if len(news.news) > 30:
+		model = PredictionModel(news.news)
+		prediction = model.predict()['prediction']
 	else:
 		prediction = 'not enough news to check'
 	return {'prediction': f'{prediction}' }

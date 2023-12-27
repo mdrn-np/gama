@@ -7,13 +7,13 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./frontend/contentScript.js"]
+      "js": ["contentScript.js"]
     }
   ],
   "background": {
-    "service_worker": "./frontend/background.js"
+    "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "./frontend/popup.html"
+    "default_popup": "popup.html"
   }
 }
