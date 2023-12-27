@@ -69,6 +69,7 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.prediction);
+        
         chrome.notifications.create('installation', {
           type: 'basic',
           iconUrl: 'logo.png',
@@ -76,6 +77,7 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
           message: function() {return data.prediction? 'The review is authentic':'The review is likely fake'},
           priority: 1
         })
+
       })
       .catch((error) => console.log(error));
     console.log(review);
@@ -107,4 +109,4 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
       .catch((error) => console.log(error));
     console.log(news);
   }
-});
+});s
