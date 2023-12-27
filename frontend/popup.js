@@ -50,7 +50,7 @@ document.getElementById("submitReport").addEventListener("click", function () {
       let submitButton = document.getElementById("submitReport");
       submitButton.disabled = true;
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.log(error));
 });
 
 // Get the checkbox element
