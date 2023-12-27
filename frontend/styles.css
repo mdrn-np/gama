@@ -119,25 +119,13 @@ h5 {
 
 #reportContainer {
     width: 90%;
-}
-
-form {
     display: grid;
     justify-items: center;
     row-gap: 0.2rem;
 }
 
-form label {
+label {
     font-size: 0.9rem;
-}
-
-form input {
-    width: 90%;
-    border: none;
-    padding: 0.3rem 0.5rem;
-    background-color: whitesmoke;
-    color: black;
-    border-radius: 0.5rem;
 }
 
 textarea {
@@ -145,7 +133,7 @@ textarea {
     margin-bottom: 0.3rem;
 }
 
-form #submitBtn {
+#submitReport {
     height: 2.5rem;
     width: 8rem;
     font-size: 0.95rem;
@@ -157,7 +145,7 @@ form #submitBtn {
     font-weight: bolder;
 }
 
-form #submitBtn:hover {
+#submitReport:hover {
     cursor: pointer;
     background-color: var(--primaryColor);
     color: var(--accentColor);
