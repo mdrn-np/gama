@@ -1,15 +1,18 @@
+# Libraries and frameworks
 import uvicorn
 from fastapi import FastAPI
 import csv
 import whoisdomain
 import pycountry
 import joblib
-from helpers import get_domain_name, reviewTester
-from models import PhishingReport, classifyFakeNews
 from tortoise.contrib.fastapi import register_tortoise
-from models import PhishingReportSchema, reviewDetectionSchema
 
+# Local files
+from helpers import get_domain_name, reviewTester
+from models import PhishingReportSchema, reviewDetectionSchema, PhishingReport
+from news_predictor import PredictionModel
 
+# Initialize FastAPI
 app = FastAPI()
 
 # Connect to database
@@ -113,8 +116,12 @@ async def check(review: reviewDetectionSchema):
 #check if a given news is real or fake on a post request that only needs a news
 @app.post('/news')
 async def check(news: str):
-	prediction = classifyFakeNews(news)
-	return {'prediction': prediction }
+	if len(news) > 30:
+		model = PredictionModel(news)
+		prediction = model.predict()
+	else:
+		prediction = 'not enough news to check'
+	return {'prediction': f'{prediction}' }
 
 # Run API with uvicorn
 if __name__ == '__main__':

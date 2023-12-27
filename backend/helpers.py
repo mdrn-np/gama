@@ -4,8 +4,7 @@ from textblob import TextBlob
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import pickle
-from keras.models import load_model
-from keras.preprocessing.sequence import pad_sequences
+
 import re
 import string
 
@@ -23,9 +22,7 @@ with open('reviewModel.pkl', 'rb') as f:
     model = pickle.load(f)
 with open('reviewVecotorizer.pkl', 'rb') as f:
     vectorizer = pickle.load(f)
-newsModel = load_model('fakeNewsModel.h5')
-with open('preprocessed_data.pickle', 'rb') as f:
-    _, _, tokenizer, maxlen = pickle.load(f)
+
 
 # FOR NLTK
 # nltk.download('stopwords')
@@ -62,20 +59,3 @@ def reviewTester(text):
     return prediction[0]
 
 
-def cleanForFakeNewsTest(text):
-    text = text.lower()
-    text = re.sub(r'\[.*?\]', '', text)
-    text = re.sub(r'\W', ' ', text)
-    text = re.sub(r'https?://\S+|www\.\S+', '', text)
-    text = re.sub(r'<.*?>', '', text)
-    text = re.sub(f'[{re.escape(string.punctuation)}]', '', text) 
-    text = re.sub(r'in', '', text)
-    text = re.sub(r'\w*\d\w*', '', text)
-    text = text.replace('\n', ' ')
-    return text
-
-def classifyFakeNews(input_text):
-    cleaned_text = cleanForFakeNewsTest(input_text)  # Use the clean_text function
-    sequences = tokenizer.texts_to_sequences([cleaned_text])  # Tokenize text
-    padded_sequences = pad_sequences(sequences, maxlen=maxlen)  # Pad sequences
-    predictions = model.predict(padded_sequences)  # Make predictions
