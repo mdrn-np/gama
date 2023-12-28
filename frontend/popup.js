@@ -41,7 +41,6 @@ document.getElementById("submitReport").addEventListener("click", function () {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(reportData),
-    mode: "no-cors", // Add this line
   })
     .then((response) => response.json())
     .then((data) => {

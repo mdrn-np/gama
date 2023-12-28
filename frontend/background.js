@@ -26,8 +26,10 @@ chrome.tabs.onUpdated.addListener(async () => {
       let phishing_url = `${server_url}phishing?url=${activeTabUrl}`;
       phishing = await checkPhishing(phishing_url);
 
+      // In background.js
       if (phishing) {
-        chrome.tabs.update({ url: "override.html" });
+        var url = "override.html?url=" + encodeURIComponent(activeTabUrl);
+        chrome.tabs.update({ url: url });
       }
       console.log(phishing);
     });
@@ -75,8 +77,8 @@ chrome.contextMenus.onClicked.addListener((clickData) => {
           iconUrl: "logo.png",
           title: "Review Validation",
           message: data.prediction
-            ? "The review is authentic"
-            : "The review is likely fake (take it with a grain of salt)",
+            ? "The review is likely fake (take it with a grain of salt)"
+            : "The review is authentic",
           priority: 1,
         });
       })

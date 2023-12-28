@@ -140,6 +140,7 @@ async def update(id: int, real: bool):
 
 
 # Get website details from whois
+
 @app.get('/details')
 async def whois(url: str):
 	domain = get_domain_name(url)

@@ -1,43 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
 
 :root {
-    --accentColor: #001233;
-    --primaryColor: #FF595A;
-    --secondaryColor: #CAC0B3;
+  --accentColor: #001233;
+  --primaryColor: #ff595a;
+  --secondaryColor: #cac0b3;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Lexend', 'Arial';
-    background-color: #001233;
-    color: var(--primaryColor);
-    display: grid;
-    justify-items: center;
-    width: 70%;
-    padding: 5rem;
+  font-family: "Lexend", "Arial";
+  background-color: #001233;
+  color: var(--primaryColor);
+  display: grid;
+  justify-items: center;
+  width: 70%;
+  padding: 5rem;
 }
 
-
 #reportBtn {
-    width: 20rem;
+  width: 20rem;
 }
 
 textarea {
-    resize: none;
-    width: 40rem;
-    height: 15rem;
+  resize: none;
+  width: 40rem;
+  height: 15rem;
 }
 
 #reportContainer {
-    padding: 2rem;
-    width: 60%;
+  padding: 2rem;
+  width: 60%;
 }
 
 #proceedBtn {
-    margin-top: 2rem;   
+  margin-top: 2rem;
+}
+#urlForReport {
+  height: 1.8rem;
 }
